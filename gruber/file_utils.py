@@ -8,12 +8,20 @@ import re
 
 # Note: this is from Karel's file_io:
 # https://github.com/vesis84/kaldi-io-for-python/blob/master/kaldi_io/kaldi_io.py
-def open_or_fd(file, mode='rb', encoding='utf-8'):
+# but modified for python3.
+# You should set encoding=None for binary data.
+def open_or_fd(file, mode='r', encoding='utf-8'):
     """ fd = open_or_fd(file)
      Open file, gzipped file, pipe, or forward the file-descriptor.
      Eventually seeks in the 'file' argument contains ':offset' suffix.
+
+     Args:
+          mode:  May be 'r' or 'w'.
+        encoding:  The file encoding, or None for a binary file.
     """
     offset = None
+
+
     #try:
     if True:
         # strip 'ark:' prefix from r{x,w}filename (optional),

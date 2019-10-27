@@ -18,11 +18,18 @@ def open_or_fd(file, mode='r', encoding='utf-8'):
      Args:
           mode:  May be 'r' or 'w'.
         encoding:  The file encoding, or None for a binary file.
+
+     Return:
+          On success returns the opened file object (raises on failure)
+     Raises:
+          May raise ValueError, FileNotFoundError, SubprocessFailed, and
+          possibly others.
     """
     offset = None
 
+    if encoding is None and not 'b' in mode:
+        mode += 'b'
 
-    #try:
     if True:
         # strip 'ark:' prefix from r{x,w}filename (optional),
         if re.search('^(ark|scp)(,scp|,b|,t|,n?f|,n?p|,b?o|,n?s|,n?cs)*:', file):
@@ -41,7 +48,7 @@ def open_or_fd(file, mode='r', encoding='utf-8'):
             fd = gzip.open(file, mode, encoding=encoding)
         # a normal file...
         else:
-            fd = open(file, mode)
+            fd = open(file, mode, encoding=encoding)
             #except TypeError:
         # 'file' is opened file descriptor,
         #fd = file

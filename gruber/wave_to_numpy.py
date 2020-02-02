@@ -50,7 +50,6 @@ def read_wave(f):
     # resampling.
     data = wav.data.swapaxes(0, 1)
     if data.dtype == np.int16:
-        print("int16 reading")
         data = data.astype(np.float32) * (1.0 / 2**15)
     elif data.dtype == np.int24:
         data = data.astype(np.float32) * (1.0 / 2**23)

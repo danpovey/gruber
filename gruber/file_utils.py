@@ -25,6 +25,10 @@ def open_or_fd(file, mode='r', encoding='utf-8'):
           May raise ValueError, FileNotFoundError, SubprocessFailed, and
           possibly others.
     """
+    if not isinstance(file, str) and not isinstance(file, bytes):
+        # Assume it's already a file-like object
+        return file
+
     offset = None
 
     if encoding is None and not 'b' in mode:
